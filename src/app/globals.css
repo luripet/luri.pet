@@ -1,26 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Noto+Sans+JP:wght@300;400;500&display=swap");
 @import "tailwindcss";
 
+/* ── Design tokens ──────────────────────────────────────────── */
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --bg:       #0c0c0d;
+  --fg:       #e8e8ea;
+  --fg-2:     rgba(232,232,234,0.45);
+  --fg-3:     rgba(232,232,234,0.22);
+  --accent:   rgba(232,232,234,0.06);
+  --border:   rgba(232,232,234,0.08);
+  --dot-ring: #0c0c0d;
+
+  /* link hover underline */
+  --link-color:       rgba(232,232,234,0.55);
+  --link-color-hover: #e8e8ea;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+[data-theme="light"] {
+  --bg:       #f5f5f5;
+  --fg:       #111111;
+  --fg-2:     #555558;
+  --fg-3:     #909095;
+  --accent:   rgba(0,0,0,0.05);
+  --border:   rgba(0,0,0,0.1);
+  --dot-ring: #f5f5f5;
+  --link-color:       #555558;
+  --link-color-hover: #111111;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* ── Reset ──────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { -webkit-font-smoothing: antialiased; }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Inter", "Noto Sans JP", sans-serif;
+  font-size: 14px;
+  line-height: 1.6;
+  min-height: 100dvh;
+  transition: background 0.25s ease, color 0.25s ease;
 }
+
+/* ── Social icon links ──────────────────────────────────────── */
+.slink {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--link-color);
+  transition: color 0.15s ease;
+  text-decoration: none;
+}
+.slink:hover { color: var(--link-color-hover); }
+
+/* ── Theme toggle ───────────────────────────────────────────── */
+.theme-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  color: var(--fg-3);
+  transition: color 0.15s ease;
+  line-height: 1;
+}
+.theme-btn:hover { color: var(--fg-2); }
+
+/* ── Meta row (label + value) ───────────────────────────────── */
+.meta-row {
+  display: flex;
+  align-items: baseline;
+  gap: 0;
+  font-size: 13.5px;
+  line-height: 1.7;
+  color: var(--fg-2);
+}
+.meta-label { color: var(--fg-3); min-width: 96px; flex-shrink: 0; }
+.meta-value { color: var(--fg-2); }
+.meta-value strong { color: var(--fg); font-weight: 500; }
+
+/* ── Activity card ──────────────────────────────────────────── */
+.act-card {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  padding: 10px 12px;
+  border-radius: 8px;
+  background: var(--accent);
+  border: 1px solid var(--border);
+  transition: background 0.25s ease, border-color 0.25s ease;
+}
+
+/* ── Animations ─────────────────────────────────────────────── */
+@keyframes up {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes blink {
+  0%,100% { opacity:1; transform:scale(1); }
+  50%     { opacity:0.45; transform:scale(0.75); }
+}
+
+.fade-up { animation: up 0.55s cubic-bezier(0.22,1,0.36,1) both; }
+.d1 { animation-delay: 0.06s; }
+.d2 { animation-delay: 0.12s; }
+.d3 { animation-delay: 0.18s; }
+.d4 { animation-delay: 0.24s; }
+.d5 { animation-delay: 0.30s; }
+
+/* ── Scrollbar ──────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 3px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
