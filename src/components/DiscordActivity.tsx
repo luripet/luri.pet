@@ -186,14 +186,13 @@ export function Avatar() {
 
   return (
     <div style={{ position: "relative", width: 52, height: 52, flexShrink: 0 }}>
-      <div style={{
-        width: 52, height: 52, borderRadius: "50%",
-        background: "linear-gradient(140deg, rgba(110,90,200,0.25) 0%, rgba(50,110,190,0.15) 100%)",
-        border: "1px solid var(--border)",
-        display: "flex", alignItems: "center", justifyContent: "center",
-      }}>
-        <span style={{ fontSize: 10, color: "var(--fg-3)", letterSpacing: "0.04em" }}>soon</span>
-      </div>
+      <img
+        src="/icon.png"
+        alt="luripet"
+        width={52}
+        height={52}
+        style={{ borderRadius: "50%", objectFit: "cover", display: "block" }}
+      />
       {presence && (
         <span style={{
           position: "absolute", bottom: 1, right: 0,
